@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CheapService247</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050508;--surface:#0d0d12;--surface2:#13131a;--surface3:#1a1a24;
+  --border:#1e1e2a;--border-light:#2a2a3a;
+  --text:#e8e8f0;--text-dim:#8888a0;--text-muted:#55556a;
+  --accent:#6c5ce7;--accent2:#a29bfe;--accent-glow:rgba(108,92,231,.15);
+  --green:#00cec9;--green-glow:rgba(0,206,201,.12);
+  --gold:#fdcb6e;--gold-glow:rgba(253,203,110,.1);
+  --pink:#fd79a8;--pink-glow:rgba(253,121,168,.1);
+  --tg-blue:#0088cc;--dc-blue:#5865f2;
+  --radius:12px;--radius-lg:20px;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:'Be Vietnam Pro','Noto Sans SC',sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%,rgba(108,92,231,.08),transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%,rgba(0,206,201,.05),transparent);
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+#particles{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+}
+.container,.modal-overlay,.lang-bar{position:relative;z-index:1}
+.container{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+.lang-bar{
+  position:fixed;top:20px;right:20px;z-index:3000;
+  display:flex;gap:4px;padding:4px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:100px;backdrop-filter:blur(12px);
+}
+.lang-btn{
+  padding:8px 14px;border:none;border-radius:100px;
+  background:transparent;color:var(--text-dim);
+  font-size:.75rem;font-weight:600;cursor:pointer;
+  transition:all .25s;font-family:inherit;
+  letter-spacing:.02em;
+}
+.lang-btn:hover{color:var(--text)}
+.lang-btn.active{
+  background:var(--accent);color:#fff;
+  box-shadow:0 2px 12px rgba(108,92,231,.4);
+}
+/* PLACEHOLDER:css-header */
+.header{text-align:center;margin-bottom:56px;position:relative;padding-top:20px}
+.header::after{
+  content:'';display:block;width:60px;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--green));
+  margin:24px auto 0;border-radius:2px;
+}
+.header h1{
+  font-size:clamp(1.8rem,5vw,2.6rem);font-weight:800;
+  letter-spacing:-.02em;line-height:1.2;
+  background:linear-gradient(135deg,#fff 0%,var(--accent2) 50%,var(--green) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.header p{color:var(--text-dim);font-size:.9rem;margin-top:10px;font-weight:300}
+/* PLACEHOLDER:css-section */
+.section{
+  margin-bottom:40px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.section:hover{border-color:var(--border-light)}
+
+.section-header{
+  display:flex;align-items:center;gap:14px;
+  padding:24px 28px 20px;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.section-title{font-size:1.1rem;font-weight:700;letter-spacing:-.01em}
+.section-subtitle{font-size:.78rem;color:var(--text-dim);margin-top:2px;font-weight:400}
+.section-number{
+  position:absolute;top:24px;right:28px;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  color:var(--text-muted);font-weight:500;
+}
+/* PLACEHOLDER:css-icons */
+.section-icon{
+  width:42px;height:42px;border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+}
+.section-icon.x{background:var(--accent-glow);border:1px solid rgba(108,92,231,.2)}
+.section-icon.blue{background:var(--green-glow);border:1px solid rgba(0,206,201,.2)}
+.section-icon.gold{background:var(--dc-blue);border:1px solid rgba(88,101,242,.3)}
+.section-icon.pink{background:var(--pink-glow);border:1px solid rgba(253,121,168,.2)}
+.section-icon.purple{background:var(--tg-blue);border:1px solid rgba(0,136,204,.3)}
+.section-icon.rules{background:var(--gold-glow);border:1px solid rgba(253,203,110,.2)}
+.section-icon svg{width:24px;height:24px}
+/* PLACEHOLDER:css-table */
+.table-wrap{padding:0 20px 20px}
+table{width:100%;border-collapse:separate;border-spacing:0;margin-top:4px}
+thead th{
+  padding:12px 16px;text-align:left;font-size:.72rem;
+  font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--text-muted);
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+thead th:first-child{border-radius:var(--radius) 0 0 0}
+thead th:last-child{border-radius:0 var(--radius) 0 0}
+tbody td{
+  padding:14px 16px;font-size:.88rem;font-weight:400;
+  border-bottom:1px solid var(--border);
+  color:var(--text);vertical-align:middle;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:rgba(108,92,231,.04)}
+/* PLACEHOLDER:css-tags */
+.price{
+  font-family:'JetBrains Mono',monospace;font-weight:600;
+  color:var(--green);font-size:.95rem;
+}
+.bonus-tag{
+  display:inline-block;padding:3px 10px;border-radius:100px;
+  font-size:.72rem;font-weight:500;
+  background:var(--accent-glow);color:var(--accent2);
+  border:1px solid rgba(108,92,231,.15);
+}
+.note-tag{
+  display:inline-block;padding:3px 10px;border-radius:100px;
+  font-size:.72rem;font-weight:500;
+  background:var(--gold-glow);color:var(--gold);
+  border:1px solid rgba(253,203,110,.15);
+}
+.discount-tag{
+  display:inline-block;padding:3px 10px;border-radius:100px;
+  font-size:.72rem;font-weight:500;
+  background:var(--green-glow);color:var(--green);
+  border:1px solid rgba(0,206,201,.15);
+}
+/* PLACEHOLDER:css-note */
+.note-box{
+  margin:0 20px 20px;padding:14px 18px;
+  background:var(--surface2);border-radius:var(--radius);
+  border-left:3px solid var(--accent);
+  font-size:.8rem;color:var(--text-dim);line-height:1.6;
+}
+.note-box strong{color:var(--text);font-weight:600}
+/* PLACEHOLDER:css-rules */
+.rules-list{padding:0 28px 24px;list-style:none}
+.rules-list li{
+  padding:12px 0;border-bottom:1px solid var(--border);
+  font-size:.85rem;color:var(--text-dim);line-height:1.7;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.rules-list li:last-child{border-bottom:none}
+.rules-list .rule-num{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  color:var(--accent2);background:var(--accent-glow);
+  padding:2px 8px;border-radius:6px;flex-shrink:0;
+  font-weight:600;margin-top:2px;
+}
+/* Modal overlay for rules */
+.modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(5,5,8,.95);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  animation:fadeIn .4s ease;
+}
+.modal-overlay.hidden{display:none}
+.modal-content{
+  max-width:700px;width:100%;max-height:85vh;overflow-y:auto;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  animation:scaleIn .4s ease;
+}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 28px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--surface);z-index:10;
+}
+.modal-header h2{font-size:1.2rem;font-weight:700}
+.modal-close{
+  padding:8px 16px;border-radius:100px;
+  background:var(--accent);border:none;
+  color:#fff;cursor:pointer;
+  transition:all .2s;font-size:.78rem;font-weight:600;
+  font-family:inherit;
+}
+.modal-close:hover{background:var(--accent2);box-shadow:0 2px 12px rgba(108,92,231,.4)}
+.modal-body{padding:24px 28px}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+/* PLACEHOLDER:css-footer */
+.footer{
+  text-align:center;margin-top:56px;padding-top:32px;
+  border-top:1px solid var(--border);
+}
+.footer p{font-size:.78rem;color:var(--text-muted);font-weight:300;line-height:1.8}
+.footer .brand{
+  font-weight:700;font-size:.85rem;
+  background:linear-gradient(90deg,var(--accent2),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+/* PLACEHOLDER:css-animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeUp .6s ease both}
+.section:nth-child(2){animation-delay:.08s}
+.section:nth-child(3){animation-delay:.16s}
+.section:nth-child(4){animation-delay:.24s}
+.section:nth-child(5){animation-delay:.32s}
+.section:nth-child(6){animation-delay:.40s}
+.section:nth-child(7){animation-delay:.48s}
+.header{animation:fadeUp .6s ease both}
+/* PLACEHOLDER:css-form */
+.form-label{
+  display:block;font-size:.78rem;font-weight:600;
+  color:var(--text-dim);margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.form-input{
+  width:100%;padding:12px 16px;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--text);
+  font-family:inherit;font-size:.88rem;
+  transition:border-color .25s,box-shadow .25s;
+  outline:none;appearance:none;
+}
+.form-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-glow);
+}
+.form-input::placeholder{color:var(--text-muted);font-weight:300}
+select.form-input{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238888a0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:36px}
+select.form-input option,select.form-input optgroup{background:var(--surface);color:var(--text)}
+.order-submit-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 24px;border:none;border-radius:100px;
+  background:linear-gradient(135deg,var(--accent),#5a4bd1);
+  color:#fff;font-family:inherit;font-size:.88rem;font-weight:700;
+  cursor:pointer;transition:all .3s;
+  box-shadow:0 4px 20px rgba(108,92,231,.3);
+  letter-spacing:.01em;
+}
+.order-submit-btn:hover{
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  box-shadow:0 6px 28px rgba(108,92,231,.5);
+  transform:translateY(-1px);
+}
+.order-submit-btn:active{transform:translateY(0)}
+@media(max-width:640px){
+  #orderForm>div>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  .order-submit-btn{width:100%;justify-content:center}
+}
+/* PLACEHOLDER:css-responsive */
+@media(max-width:640px){
+  .container{padding:24px 14px 60px}
+  .section-header{padding:18px 18px 16px}
+  .table-wrap{padding:0 10px 14px;overflow-x:auto}
+  thead th,tbody td{padding:10px 10px;font-size:.78rem}
+  .section-number{display:none}
+  .note-box{margin:0 10px 14px}
+  .rules-list{padding:0 18px 20px}
+  .lang-bar{top:12px;right:12px}
+  .lang-btn{padding:6px 10px;font-size:.7rem}
+}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<!-- Language Switcher -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('vi')">VI</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('zh')">中文</button>
+</div>
+<!-- Rules Modal -->
+<div class="modal-overlay" id="rulesModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 data-vi="Quy tắc & Điều khoản" data-en="Rules & Terms" data-zh="规则与条款">Quy tắc & Điều khoản</h2>
+      <button class="modal-close" onclick="closeModal()" data-vi="Tôi đã hiểu" data-en="I understand" data-zh="我明白了">Tôi đã hiểu</button>
+    </div>
+    <div class="modal-body">
+      <ul class="rules-list">
+        <li>
+          <span class="rule-num">01</span>
+          <span data-vi="Thanh toán trước khi thực hiện dịch vụ. Chỉ nhận thanh toán bằng tiền điện tử (USDT)." data-en="Payment is required before service execution. Only cryptocurrency payments (USDT) are accepted." data-zh="服务执行前需先付款。仅接受加密货币 (USDT) 付款。">Thanh toán trước khi thực hiện dịch vụ. Chỉ nhận thanh toán bằng tiền điện tử (USDT).</span>
+        </li>
+        <li>
+          <span class="rule-num">02</span>
+          <span data-vi="Không hoàn tiền sau khi dịch vụ đã được bàn giao. Vui lòng kiểm tra kỹ trước khi xác nhận." data-en="No refunds after service delivery. Please verify carefully before confirming." data-zh="服务交付后不予退款。请在确认前仔细检查。">Không hoàn tiền sau khi dịch vụ đã được bàn giao. Vui lòng kiểm tra kỹ trước khi xác nhận.</span>
+        </li>
+        <li>
+          <span class="rule-num">03</span>
+          <span data-vi="Thời gian hoàn thành đơn hàng từ 1 – 7 ngày tùy vào số lượng và loại dịch vụ." data-en="Order completion time ranges from 1 – 7 days depending on quantity and service type." data-zh="订单完成时间为1-7天，具体取决于数量和服务类型。">Thời gian hoàn thành đơn hàng từ 1 – 7 ngày tùy vào số lượng và loại dịch vụ.</span>
+        </li>
+        <li>
+          <span class="rule-num">04</span>
+          <span data-vi="Không chịu trách nhiệm nếu tài khoản bị khóa do vi phạm chính sách nền tảng sau khi bàn giao." data-en="We are not responsible if accounts are banned due to platform policy violations after delivery." data-zh="交付后因违反平台政策导致账号被封，我方不承担责任。">Không chịu trách nhiệm nếu tài khoản bị khóa do vi phạm chính sách nền tảng sau khi bàn giao.</span>
+        </li>
+        <li>
+          <span class="rule-num">05</span>
+          <span data-vi="Liên hệ trực tiếp để được tư vấn và báo giá cho các đơn hàng số lượng lớn." data-en="Contact us directly for consultation and quotes on bulk orders." data-zh="大宗订单请直接联系我们获取咨询和报价。">Liên hệ trực tiếp để được tư vấn và báo giá cho các đơn hàng số lượng lớn.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1 data-vi="BẢNG GIÁ DỊCH VỤ" data-en="SERVICE PRICE LIST" data-zh="服务价格表">BẢNG GIÁ DỊCH VỤ</h1>
+    <p data-vi="Danh sách dịch vụ và bảng giá chi tiết" data-en="Service list and detailed pricing" data-zh="服务列表及详细价格">Danh sách dịch vụ và bảng giá chi tiết</p>
+  </div>
+  <!-- Section 1: X Interactions -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon x"><svg viewBox="0 0 24 24" fill="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="#a29bfe"/></svg></div>
+      <div>
+        <div class="section-title" data-vi="Tương tác trên X (Twitter)" data-en="Interactions on X (Twitter)" data-zh="X (Twitter) 互动">Tương tác trên X (Twitter)</div>
+        <div class="section-subtitle" data-vi="Tăng tương tác thật cho bài viết của bạn" data-en="Boost real engagement for your posts" data-zh="为您的帖子提升真实互动">Tăng tương tác thật cho bài viết của bạn</div>
+      </div>
+      <div class="section-number">01</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-vi="Dịch vụ" data-en="Service" data-zh="服务">Dịch vụ</th>
+            <th data-vi="Số lượng" data-en="Quantity" data-zh="数量">Số lượng</th>
+            <th data-vi="Giá" data-en="Price" data-zh="价格">Giá</th>
+            <th data-vi="Bonus kèm theo" data-en="Bonus Included" data-zh="附赠内容">Bonus kèm theo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Quote</td><td>10</td>
+            <td><span class="price">2$</span></td>
+            <td><span class="bonus-tag" data-vi="Tim + Bình luận" data-en="Like + Comment" data-zh="点赞 + 评论">Tim + Bình luận</span></td>
+          </tr>
+          <tr>
+            <td>Repost</td><td>10</td>
+            <td><span class="price">1$</span></td>
+            <td><span class="bonus-tag" data-vi="Tim + Bình luận" data-en="Like + Comment" data-zh="点赞 + 评论">Tim + Bình luận</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box">
+      <strong data-vi="Lưu ý:" data-en="Note:" data-zh="注意:">Lưu ý:</strong>
+      <span data-vi="Tương tác được thực hiện với 30 tài khoản, mỗi tài khoản có từ 80 – 100 followers. Phần còn lại sẽ được random các tài khoản ngẫu nhiên." data-en="Interactions are performed using 30 accounts, each with 80–100 followers. The remainder will be randomly assigned to other accounts." data-zh="互动由30个账号执行，每个账号有80-100个粉丝。其余部分将随机分配给其他账号。">Tương tác được thực hiện với 30 tài khoản, mỗi tài khoản có từ 80 – 100 followers. Phần còn lại sẽ được random các tài khoản ngẫu nhiên.</span>
+    </div>
+  </div>
+  <!-- Section 2: X Blue Tick -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue"><svg viewBox="0 0 24 24" fill="none"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#00cec9"/></svg></div>
+      <div>
+        <div class="section-title" data-vi="Tích xanh X" data-en="X Blue Tick" data-zh="X 蓝标认证">Tích xanh X</div>
+        <div class="section-subtitle" data-vi="Xác minh tài khoản trên nền tảng X" data-en="Account verification on X platform" data-zh="X 平台账号认证">Xác minh tài khoản trên nền tảng X</div>
+      </div>
+      <div class="section-number">02</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-vi="Thời hạn" data-en="Duration" data-zh="期限">Thời hạn</th>
+            <th data-vi="Giá" data-en="Price" data-zh="价格">Giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-vi="3 tháng" data-en="3 months" data-zh="3个月">3 tháng</td><td><span class="price">9$</span></td></tr>
+          <tr><td data-vi="6 tháng" data-en="6 months" data-zh="6个月">6 tháng</td><td><span class="price">16$</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Section 3: Discord Referrals -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon gold"><svg viewBox="0 0 24 24" fill="none"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" fill="#fff"/></svg></div>
+      <div>
+        <div class="section-title" data-vi="Lời mời Discord (Referrals)" data-en="Discord Invites (Referrals)" data-zh="Discord 邀请 (推荐)">Lời mời Discord (Referrals)</div>
+        <div class="section-subtitle" data-vi="Tăng số lượng thành viên cho server" data-en="Increase server member count" data-zh="增加服务器成员数量">Tăng số lượng thành viên cho server</div>
+      </div>
+      <div class="section-number">03</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-vi="Số lượng Ref" data-en="Ref Count" data-zh="推荐数量">Số lượng Ref</th>
+            <th data-vi="Giá" data-en="Price" data-zh="价格">Giá</th>
+            <th data-vi="Ghi chú" data-en="Notes" data-zh="备注">Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>20</td>
+            <td><span class="price">2$</span></td>
+            <td><span class="note-tag" data-vi="Đơn hàng tối thiểu" data-en="Minimum order" data-zh="最低订单">Đơn hàng tối thiểu</span></td>
+          </tr>
+          <tr><td>100</td><td><span class="price">6$</span></td><td>—</td></tr>
+          <tr>
+            <td>500</td>
+            <td><span class="price">28$</span></td>
+            <td><span class="discount-tag" data-vi="Giá ưu đãi" data-en="Discounted" data-zh="优惠价">Giá ưu đãi</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Section 4: Facebook -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon pink"><svg viewBox="0 0 24 24" fill="none"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#fd79a8"/></svg></div>
+      <div>
+        <div class="section-title" data-vi="Tài khoản Facebook" data-en="Facebook Accounts" data-zh="Facebook 账号">Tài khoản Facebook</div>
+        <div class="section-subtitle" data-vi="Tài khoản được xác minh ID" data-en="ID verified accounts" data-zh="已验证身份的账号">Tài khoản được xác minh ID</div>
+      </div>
+      <div class="section-number">04</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-vi="Loại tài khoản" data-en="Account Type" data-zh="账号类型">Loại tài khoản</th>
+            <th data-vi="Tiêu chí" data-en="Criteria" data-zh="标准">Tiêu chí</th>
+            <th data-vi="Giá" data-en="Price" data-zh="价格">Giá</th>
+            <th data-vi="Ghi chú" data-en="Notes" data-zh="备注">Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-vi="Tài khoản Random" data-en="Random Account" data-zh="随机账号">Tài khoản Random</td>
+            <td data-vi="80 – 150 bạn bè" data-en="80 – 150 friends" data-zh="80 – 150 好友">80 – 150 bạn bè</td>
+            <td><span class="price">3$</span></td>
+            <td><span class="bonus-tag" data-vi="Được check ID" data-en="ID verified" data-zh="已验证身份">Được check ID</span></td>
+          </tr>
+          <tr>
+            <td data-vi="Tài khoản Cao cấp" data-en="Premium Account" data-zh="高级账号">Tài khoản Cao cấp</td>
+            <td data-vi="> 100 bạn bè + 1k người theo dõi" data-en="> 100 friends + 1k followers" data-zh="> 100 好友 + 1k 关注者">> 100 bạn bè + 1k người theo dõi</td>
+            <td><span class="price">4$</span></td>
+            <td><span class="bonus-tag" data-vi="Được check ID" data-en="ID verified" data-zh="已验证身份">Được check ID</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Section 5: Telegram -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon purple"><svg viewBox="0 0 24 24" fill="none"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="#fff"/></svg></div>
+      <div>
+        <div class="section-title" data-vi="Tài khoản Telegram" data-en="Telegram Accounts" data-zh="Telegram 账号">Tài khoản Telegram</div>
+        <div class="section-subtitle" data-vi="Tài khoản sẵn sàng sử dụng" data-en="Ready-to-use accounts" data-zh="即买即用的账号">Tài khoản sẵn sàng sử dụng</div>
+      </div>
+      <div class="section-number">05</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-vi="Số lượng tài khoản" data-en="Account Count" data-zh="账号数量">Số lượng tài khoản</th>
+            <th data-vi="Giá" data-en="Price" data-zh="价格">Giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>10</td><td><span class="price">12$</span></td></tr>
+          <tr><td>20</td><td><span class="price">23$</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Section 6: Order Form -->
+  <div class="section" id="order-section" style="animation-delay:.56s">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,var(--accent-glow),var(--green-glow));border:1px solid rgba(108,92,231,.25)">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.15 4.15A2 2 0 005.21 5.67L4.02 11h15.96l-1.19-5.33A2 2 0 0016.84 4H7.15zM6 6h12l1 4H5l1-4z" fill="url(#orderGrad)"/>
+          <defs><linearGradient id="orderGrad" x1="2" y1="4" x2="22" y2="22"><stop stop-color="#a29bfe"/><stop offset="1" stop-color="#00cec9"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div>
+        <div class="section-title" data-vi="Đặt hàng" data-en="Place Order" data-zh="下单">Đặt hàng</div>
+        <div class="section-subtitle" data-vi="Chọn dịch vụ và gửi yêu cầu của bạn" data-en="Choose a service and submit your request" data-zh="选择服务并提交您的请求">Chọn dịch vụ và gửi yêu cầu của bạn</div>
+      </div>
+      <div class="section-number">06</div>
+    </div>
+    <form id="orderForm" style="padding:24px 28px 28px" onsubmit="submitOrder(event)">
+      <div style="display:grid;gap:20px">
+        <div>
+          <label class="form-label" data-vi="Dịch vụ" data-en="Service" data-zh="服务">Dịch vụ</label>
+          <select id="orderService" class="form-input" required>
+            <option value="" data-vi="— Chọn dịch vụ —" data-en="— Select service —" data-zh="— 选择服务 —">— Chọn dịch vụ —</option>
+            <optgroup label="X (Twitter)">
+              <option value="x-quote" data-vi="Quote (10) - 2$" data-en="Quote (10) - $2" data-zh="引用 (10) - 2$">Quote (10) - 2$</option>
+              <option value="x-repost" data-vi="Repost (10) - 1$" data-en="Repost (10) - $1" data-zh="转推 (10) - 1$">Repost (10) - 1$</option>
+            </optgroup>
+            <optgroup label="Tích xanh X">
+              <option value="tick-3m" data-vi="3 tháng - 9$" data-en="3 months - $9" data-zh="3个月 - 9$">3 tháng - 9$</option>
+              <option value="tick-6m" data-vi="6 tháng - 16$" data-en="6 months - $16" data-zh="6个月 - 16$">6 tháng - 16$</option>
+            </optgroup>
+            <optgroup label="Discord Referrals">
+              <option value="dc-20" data-vi="20 Refs - 2$" data-en="20 Refs - $2" data-zh="20 推荐 - 2$">20 Refs - 2$</option>
+              <option value="dc-100" data-vi="100 Refs - 6$" data-en="100 Refs - $6" data-zh="100 推荐 - 6$">100 Refs - 6$</option>
+              <option value="dc-500" data-vi="500 Refs - 28$" data-en="500 Refs - $28" data-zh="500 推荐 - 28$">500 Refs - 28$</option>
+            </optgroup>
+            <optgroup label="Facebook">
+              <option value="fb-random" data-vi="Tài khoản Random - 3$" data-en="Random Account - $3" data-zh="随机账号 - 3$">Tài khoản Random - 3$</option>
+              <option value="fb-premium" data-vi="Tài khoản Cao cấp - 4$" data-en="Premium Account - $4" data-zh="高级账号 - 4$">Tài khoản Cao cấp - 4$</option>
+            </optgroup>
+            <optgroup label="Telegram">
+              <option value="tg-10" data-vi="10 tài khoản - 12$" data-en="10 accounts - $12" data-zh="10 个账号 - 12$">10 tài khoản - 12$</option>
+              <option value="tg-20" data-vi="20 tài khoản - 23$" data-en="20 accounts - $23" data-zh="20 个账号 - 23$">20 tài khoản - 23$</option>
+            </optgroup>
+            <optgroup label="Khác">
+              <option value="custom" data-vi="Dịch vụ khác (ghi bên dưới)" data-en="Other service (describe below)" data-zh="其他服务 (请在下方说明)">Dịch vụ khác (ghi bên dưới)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label class="form-label" data-vi="Số lượng" data-en="Quantity" data-zh="数量">Số lượng</label>
+            <input type="number" id="orderQty" class="form-input" min="1" value="1" required placeholder="1">
+          </div>
+          <div>
+            <label class="form-label" data-vi="Link / URL" data-en="Link / URL" data-zh="链接 / URL">Link / URL</label>
+            <input type="url" id="orderLink" class="form-input" placeholder="https://...">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label class="form-label" data-vi="Tên của bạn" data-en="Your name" data-zh="您的名字">Tên của bạn</label>
+            <input type="text" id="orderName" class="form-input" required placeholder="John">
+          </div>
+          <div>
+            <label class="form-label">Telegram</label>
+            <input type="text" id="orderTg" class="form-input" required placeholder="@username">
+          </div>
+        </div>
+        <div>
+          <label class="form-label" data-vi="Ghi chú" data-en="Notes" data-zh="备注">Ghi chú</label>
+          <textarea id="orderNote" class="form-input" rows="3" style="resize:vertical;min-height:70px;font-family:inherit" data-vi-placeholder="Nội dung yêu cầu khác..." data-en-placeholder="Additional request details..." data-zh-placeholder="其他需求说明..."></textarea>
+        </div>
+        <div style="background:var(--surface2);border-radius:var(--radius);padding:16px 20px;border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+          <div>
+            <div style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:4px" data-vi="Tổng tạm tính" data-en="Estimated total" data-zh="预估总价">Tổng tạm tính</div>
+            <div id="orderTotal" style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--green)">0$</div>
+          </div>
+          <button type="submit" class="order-submit-btn">
+            <span data-vi="Gửi đơn qua Telegram" data-en="Send via Telegram" data-zh="通过 Telegram 发送">Gửi đơn qua Telegram</span>
+            <svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;flex-shrink:0"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Footer -->
+  <div class="footer">
+    <p><span class="brand" data-vi="Yêu Cầu Hỗ Trợ" data-en="Request Support" data-zh="请求支持">Yêu Cầu Hỗ Trợ</span><br>
+    <span data-vi="Liên hệ trực tiếp để được tư vấn và hỗ trợ nhanh nhất" data-en="Contact us directly for the fastest consultation and support" data-zh="请直接联系我们获取最快的咨询和支持">Liên hệ trực tiếp để được tư vấn và hỗ trợ nhanh nhất</span><br>
+    <a href="https://t.me/HumanSupport247" target="_blank" style="color:var(--tg-blue);text-decoration:none;font-weight:600;transition:color .2s" onmouseover="this.style.color='var(--accent2)'" onmouseout="this.style.color='var(--tg-blue)'">@HumanSupport247</a></p>
+  </div>
+</div>
+<script>
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+    el.textContent=el.getAttribute('data-'+lang);
+  });
+  // Handle placeholder translation
+  const noteEl=document.getElementById('orderNote');
+  if(noteEl){
+    const ph=noteEl.getAttribute('data-'+lang+'-placeholder');
+    if(ph)noteEl.placeholder=ph;
+    else noteEl.placeholder='';
+  }
+  document.documentElement.lang=lang;
+}
+function closeModal(){
+  document.getElementById('rulesModal').classList.add('hidden');
+}
+
+// Order form logic
+const PRICE_MAP={
+  'x-quote':2,'x-repost':1,
+  'tick-3m':9,'tick-6m':16,
+  'dc-20':2,'dc-100':6,'dc-500':28,
+  'fb-random':3,'fb-premium':4,
+  'tg-10':12,'tg-20':23,'custom':0
+};
+const SERVICE_LABELS={
+  'x-quote':'X Quote (10)','x-repost':'X Repost (10)',
+  'tick-3m':'Tích xanh X 3 tháng','tick-6m':'Tích xanh X 6 tháng',
+  'dc-20':'Discord 20 Refs','dc-100':'Discord 100 Refs','dc-500':'Discord 500 Refs',
+  'fb-random':'FB Random Account','fb-premium':'FB Premium Account',
+  'tg-10':'TG 10 Accounts','tg-20':'TG 20 Accounts','custom':'Custom'
+};
+function updateTotal(){
+  const svc=document.getElementById('orderService').value;
+  const qty=parseInt(document.getElementById('orderQty').value)||1;
+  const unit=PRICE_MAP[svc]||0;
+  const total=unit*qty;
+  document.getElementById('orderTotal').textContent=total+'$';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const svcEl=document.getElementById('orderService');
+  const qtyEl=document.getElementById('orderQty');
+  if(svcEl)svcEl.addEventListener('change',updateTotal);
+  if(qtyEl)qtyEl.addEventListener('input',updateTotal);
+});
+function submitOrder(e){
+  e.preventDefault();
+  const svc=document.getElementById('orderService').value;
+  const qty=document.getElementById('orderQty').value;
+  const link=document.getElementById('orderLink').value;
+  const name=document.getElementById('orderName').value;
+  const tg=document.getElementById('orderTg').value;
+  const note=document.getElementById('orderNote').value;
+  const unit=PRICE_MAP[svc]||0;
+  const total=unit*parseInt(qty||1);
+  const serviceLabel=SERVICE_LABELS[svc]||svc;
+  const msg=
+    `🛒 ĐƠN HÀNG MỚI\n`+
+    `━━━━━━━━━━━━━━━━\n`+
+    `• Dịch vụ: ${serviceLabel}\n`+
+    `• Số lượng: ${qty}\n`+
+    (link?`• Link: ${link}\n`:'')+
+    (note?`• Ghi chú: ${note}\n`:'')+
+    `━━━━━━━━━━━━━━━━\n`+
+    `• Khách hàng: ${name}\n`+
+    `• Telegram: ${tg}\n`+
+    `💰 Tổng: ${total}$`;
+  const url=`https://t.me/HumanSupport247?text=${encodeURIComponent(msg)}`;
+  window.open(url,'_blank');
+}
+
+// Particle animation
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let particles=[];
+
+function resizeCanvas(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+
+function createParticles(){
+  particles=[];
+  const count=Math.floor((canvas.width*canvas.height)/15000);
+  for(let i=0;i<count;i++){
+    particles.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      vx:(Math.random()-0.5)*0.3,
+      vy:(Math.random()-0.5)*0.3,
+      size:Math.random()*1.5+0.5,
+      opacity:Math.random()*0.5+0.2
+    });
+  }
+}
+
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  
+  particles.forEach(p=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+    
+    if(p.x<0)p.x=canvas.width;
+    if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;
+    if(p.y>canvas.height)p.y=0;
+    
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle=`rgba(162,155,254,${p.opacity})`;
+    ctx.fill();
+  });
+  
+  requestAnimationFrame(animateParticles);
+}
+
+resizeCanvas();
+createParticles();
+animateParticles();
+
+window.addEventListener('resize',()=>{
+  resizeCanvas();
+  createParticles();
+});
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
